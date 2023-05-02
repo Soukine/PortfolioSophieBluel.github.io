@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login Sophie Bluel - Architecte d'intérieur</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
+        rel="stylesheet">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
+        <nav>
+            <ul>
+                <a href="/FrontEnd/index.html">
+                    <li>projets
+                    </li>
+                </a>
+                <a href="/FrontEnd/#contact">
+                    <li>contact
+                    </li>
+                </a>
+                <a href="/FrontEnd/login.html" class="active">
+                    <li>login
+                    </li>
+                </a>
+                <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="container">
+            <h2>Log In</h2>
+            <form action="" method="post" class="login">
+                <label for="email">
+                    <p>Email</p>
+                </label>
+                <input type="email" name="name" id="email" class="write-bar" required>
+                <label for="psw">
+                    <p>Mot de passe</p>
+                </label>
+                <input type="password" name="psw" id="password" class="write-bar" required>
+                <p class="wrong-psw">Erreur dans l’identifiant ou le mot de passe</p>
+                <input type="submit" id="connect" value="Se connecter"></input>
+                <div class="forget">
+                    <a href="#">Mot de passe oublié</a>
+                </div>
+            </form>
+
+        </section>
+
+    </main>
+
+    <footer id="login">
+        <nav>
+            <ul>
+                <li>Mentions Légales</li>
+            </ul>
+        </nav>
+    </footer>
+
+    <script src="./assets/JS/login.js"></script>
+</body>
+
+</html>

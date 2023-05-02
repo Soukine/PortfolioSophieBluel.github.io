@@ -10,8 +10,6 @@ const fetchWorks = async () => {
     if (data) {
         data.forEach(work => {
             const workElement = document.createElement('figure');
-
-
             const imageElement = document.createElement('img');
             imageElement.setAttribute('src', work.imageUrl);
             imageElement.setAttribute('alt', work.title);
@@ -24,7 +22,7 @@ const fetchWorks = async () => {
             gallery.appendChild(workElement);
         });
     } else {
-        console.error('Aucun travail trouvé dans la réponse de l\'API');
+        console.log(data);
     }
 };
 
@@ -32,10 +30,75 @@ const fetchWorks = async () => {
 
 const fetchCategories = async () => {
     const response = await fetch('http://localhost:5678/api/categories');
-    const data = await response.json();
-    //ajout de la fonction
-    console.log(data);
+    const categories = await response.json();
+    const filterContainer = document.getElementById('filter-container');
+
+    // Bouton "Tous"
+    const allButton = document.createElement('button');
+    allButton.textContent = 'Tous';
+    allButton.addEventListener('click', async () => {
+        const response = await fetch('http://localhost:5678/api/works');
+        const works = await response.json();
+        gallery.innerHTML = '';
+
+        works.forEach(work => {
+            const workElement = document.createElement('figure');
+            workElement.classList.add('work');
+
+            const imageElement = document.createElement('img');
+            imageElement.src = work.imageUrl;
+            imageElement.alt = work.title;
+            workElement.appendChild(imageElement);
+
+            const titleElement = document.createElement('figcaption');
+            titleElement.textContent = work.title;
+            workElement.appendChild(titleElement);
+
+            gallery.appendChild(workElement);
+        });
+    });
+
+    filterContainer.appendChild(allButton);
+
+    categories.forEach(category => {
+        const filterElement = document.createElement('button');
+        filterElement.textContent = category.name;
+
+        filterElement.addEventListener('click', async () => {
+            const response = await fetch(`http://localhost:5678/api/works?categoryId=${category.id}`);
+            const works = await response.json();
+            gallery.innerHTML = '';
+
+            works.forEach(work => {
+                if (work.categoryId === category.id) {
+                    const workElement = document.createElement('figure');
+                    workElement.classList.add('work');
+
+                    const imageElement = document.createElement('img');
+                    imageElement.src = work.imageUrl;
+                    imageElement.alt = work.title;
+                    workElement.appendChild(imageElement);
+
+                    const titleElement = document.createElement('figcaption');
+                    titleElement.textContent = work.title;
+                    workElement.appendChild(titleElement);
+
+                    gallery.appendChild(workElement);
+                }
+            });
+        });
+
+        filterContainer.appendChild(filterElement);
+    });
 };
+
+
+
+
+
+
+
+
 
 const deleteWork = async () => {
     const response = await fetch(`http://localhost:5678/api/works/${id}`, {
