@@ -342,16 +342,21 @@ footer ul li {
   text-align: center;
   margin-bottom: 30px;
 }
-#container .login {
+#container #login {
   text-align: left;
   display: flex;
   flex-direction: column;
 }
-#container .login .forget {
+#container #login .forget {
   text-align: center;
 }
-#container .login .forget a {
+#container #login .forget a {
   color: black;
+}
+#container #login #wrong-psw {
+  margin-top: 2rem;
+  color: red;
+  text-align: center;
 }
 #container .wrong-psw {
   color: red;
@@ -361,13 +366,13 @@ footer ul li {
   display: none;
 }
 
-#login {
+footer {
   position: absolute;
   bottom: 0;
   right: 0;
   background-color: white;
 }
-#login ul {
+footer ul {
   max-width: 1140px;
   margin: auto;
 }/*# sourceMappingURL=style.css.map */

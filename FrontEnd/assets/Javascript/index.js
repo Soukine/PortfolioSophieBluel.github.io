@@ -39,11 +39,10 @@ const fetchCategories = async () => {
     allButton.addEventListener('click', async () => {
         const response = await fetch('http://localhost:5678/api/works');
         const works = await response.json();
-        gallery.innerHTML = '';
+        gallery.innerHTML = ''; 0
 
         works.forEach(work => {
             const workElement = document.createElement('figure');
-            workElement.classList.add('work');
 
             const imageElement = document.createElement('img');
             imageElement.src = work.imageUrl;
@@ -72,7 +71,6 @@ const fetchCategories = async () => {
             works.forEach(work => {
                 if (work.categoryId === category.id) {
                     const workElement = document.createElement('figure');
-                    workElement.classList.add('work');
 
                     const imageElement = document.createElement('img');
                     imageElement.src = work.imageUrl;
@@ -87,13 +85,9 @@ const fetchCategories = async () => {
                 }
             });
         });
-
         filterContainer.appendChild(filterElement);
     });
 };
-
-
-
 
 
 

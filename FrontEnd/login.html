@@ -41,7 +41,7 @@
     <main>
         <section id="container">
             <h2>Log In</h2>
-            <form action="" method="post" class="login">
+            <form action="" method="post" id="login">
                 <label for="email">
                     <p>Email</p>
                 </label>
@@ -50,7 +50,7 @@
                     <p>Mot de passe</p>
                 </label>
                 <input type="password" name="psw" id="password" class="write-bar" required>
-                <p class="wrong-psw">Erreur dans l’identifiant ou le mot de passe</p>
+                <p id="wrong-psw"></p>
                 <input type="submit" id="connect" value="Se connecter"></input>
                 <div class="forget">
                     <a href="#">Mot de passe oublié</a>
@@ -61,7 +61,7 @@
 
     </main>
 
-    <footer id="login">
+    <footer>
         <nav>
             <ul>
                 <li>Mentions Légales</li>
@@ -69,7 +69,7 @@
         </nav>
     </footer>
 
-    <script src="./assets/JS/login.js"></script>
+    <script src="./assets/Javascript/login.js"></script>
 </body>
 
 </html>
