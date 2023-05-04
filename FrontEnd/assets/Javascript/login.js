@@ -1,41 +1,36 @@
-const emailCorrect = "sophie.bluel@test.tld";
-const pswCorrect = "S0phie";
-
 // Récupérons le formulaire HTML
 const formulaire = document.getElementById("login");
 
 // Définissons une fonction qui sera appelée lors de la soumission du formulaire
-function soumettreFormulaire(event) {
+async function soumettreFormulaire(event) {
     event.preventDefault(); // Empêche le formulaire de se soumettre
 
-    // Créons un objet FormData à partir du formulaire
-    const formData = new FormData(formulaire);
+    const email = formulaire.email.value;
+    const password = formulaire.password.value;
 
-    const email = formData.get("email");
-    const psw = formData.get("password");
+    const dataForm = {
+        email: email,
+        password: password
+    };
 
-    // Récupérons le token d'authentification depuis le localStorage
-    const token = localStorage.getItem("token");
-
-    fetch(`http://localhost:5678/api/users/login`, {
+    const response = await fetch(`http://localhost:5678/api/users/login`, {
         method: "POST",
-        body: formData
-    })
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error("Erreur dans l'identifiant ou le mot de passe");
-            }
-        })
-        .then(data => {
-            localStorage.setItem("token", data.token);
-            window.location.href = "index.html";
-        })
-        .catch(error => {
-            const messageErreur = document.getElementById("wrong-psw");
-            messageErreur.textContent = error.message;
-        });
+        body: JSON.stringify(dataForm),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+
+    if (!response.ok) {
+        const errorMessage = "Erreur dans l'identifiant ou le mot de passe";
+        const messageErreur = document.getElementById("wrong-psw");
+        messageErreur.textContent = errorMessage;
+        return;
+    }
+
+    const data = await response.json();
+    localStorage.setItem("token", data.token);
+    window.location.href = "index.html";
 }
 
 // Ajoutons un écouteur d'événements sur le formulaire
