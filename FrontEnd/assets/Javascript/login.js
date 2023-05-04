@@ -11,14 +11,12 @@ function soumettreFormulaire(event) {
     // Créons un objet FormData à partir du formulaire
     const formData = new FormData(formulaire);
 
-    // Récupérons les valeurs entrées par l'utilisateur dans les champs d'email et de mot de passe
     const email = formData.get("email");
     const psw = formData.get("password");
 
     // Récupérons le token d'authentification depuis le localStorage
     const token = localStorage.getItem("token");
 
-    // Créons une requête AJAX pour vérifier les informations de connexion
     fetch(`http://localhost:5678/api/users/login`, {
         method: "POST",
         body: formData
