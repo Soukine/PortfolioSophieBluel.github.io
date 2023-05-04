@@ -322,7 +322,6 @@ input[type=submit]:hover {
 }
 
 footer {
-  background-color: red;
   width: 100%;
 }
 footer ul {
@@ -364,15 +363,4 @@ footer ul li {
   margin-top: 1rem;
   text-align: center;
   display: none;
-}
-
-footer {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  background-color: white;
-}
-footer ul {
-  max-width: 1140px;
-  margin: auto;
 }/*# sourceMappingURL=style.css.map */
