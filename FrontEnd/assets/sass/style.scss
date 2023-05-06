@@ -160,6 +160,47 @@ body {
     font-size: 14px;
 }
 
+#changeBar {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    height: 59px;
+    width: 100%;
+    background-color: black;
+
+    #editionMode {
+        align-items: center;
+        display: flex;
+    }
+
+    .fa-pen-to-square {
+        margin-right: .6rem;
+        font-size: 1.2rem;
+    }
+
+    p {
+        margin-right: 1rem;
+    }
+
+    .publish {
+        font-family: 'Syne';
+        color: black;
+        padding: 0.6rem 1.2rem;
+        border-radius: 60px;
+        transition: .2s;
+        font-size: 0.875rem;
+        font-weight: 500;
+        border: none;
+
+        &:hover {
+            cursor: pointer;
+            background-color: darken($color: $primary-color, $amount: 3);
+            color: white;
+        }
+    }
+}
+
 header {
     display: flex;
     justify-content: space-between;
@@ -258,13 +299,33 @@ nav {
 }
 
 
-#portfolio h2 {
-    text-align: center;
+.project {
     margin-bottom: 1.5em;
 
-    .fa-pen-to-square {
-        color: black;
-        font-size: 1rem;
+    h2 {
+        display: flex;
+        justify-content: center;
+
+        #change {
+            align-items: center;
+            display: none;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        p {
+            font-size: 1rem;
+            color: black;
+            margin-left: 10px;
+        }
+
+        .fa-pen-to-square {
+            color: black;
+            font-size: 1.2rem;
+            margin-left: 2.5rem;
+        }
     }
 
 }

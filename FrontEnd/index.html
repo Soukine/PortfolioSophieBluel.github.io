@@ -18,6 +18,14 @@
 </head>
 
 <body>
+	<div id="changeBar">
+		<div id="editionMode">
+			<i class="fa-regular fa-pen-to-square"></i>
+			<p>Mode édition</p>
+		</div>
+		<button class="publish"> publier les changements </button>
+	</div>
+	</div>
 	<header>
 		<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
 		<nav>
@@ -31,7 +39,7 @@
 					</li>
 				</a>
 				<a href="login.html">
-					<li>login
+					<li id="logout">login
 					</li>
 				</a>
 				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
@@ -56,10 +64,13 @@
 		</section>
 		<section id="portfolio">
 			<div class="project">
-				<h2>Mes Projets<i class="fa-regular fa-pen-to-square"></i></h2>
+				<h2>Mes Projets<div id="change"> <i class="fa-regular fa-pen-to-square"></i>
+						<p>modifier</p>
+					</div>
+			</div>
+			</h2>
 			</div>
 			<div id="filter-container"></div>
-			<button id="delete-button" type="button">delete</button>
 			<div class="gallery">
 			</div>
 		</section>
@@ -81,10 +92,13 @@
 		<nav>
 			<ul>
 				<li>Mentions Légales</li>
+				<button id="myButton">oui</button>
 			</ul>
 		</nav>
 	</footer>
 	<script src="./assets/Javascript/index.js"></script>
+
 </body>
+
 
 </html>

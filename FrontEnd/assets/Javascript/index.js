@@ -1,6 +1,7 @@
-const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4';
-
+let tokenValue = localStorage.token;
+const filterContainer = document.getElementById('filter-container');
 const gallery = document.querySelector('.gallery');
+const change = document.getElementById('change');
 
 const fetchWorks = async () => {
     const response = await fetch('http://localhost:5678/api/works');
@@ -26,12 +27,10 @@ const fetchWorks = async () => {
     }
 };
 
-
-
 const fetchCategories = async () => {
     const response = await fetch('http://localhost:5678/api/categories');
     const categories = await response.json();
-    const filterContainer = document.getElementById('filter-container');
+
 
     // Bouton "Tous"
     const allButton = document.createElement('button');
@@ -94,25 +93,63 @@ const fetchCategories = async () => {
 
 
 
-const deleteWork = async () => {
-    const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+const deleteWork = async (workId) => {
+    const response = await fetch(`http://localhost:5678/api/works/${workId}`, {
         method: 'DELETE',
         headers: {
             'Authorization': `Bearer ${TOKEN}`
         }
     });
     const data = await response.json();
-    //ajout de la fonction
-    console.log(data);
+    // vérifier que la réponse est bien de type JSON avant de l'utiliser
+    if (response.ok) {
+        console.log(data);
+    } else {
+        console.error(data);
+    }
 };
+
+function adminMode() {
+    const changeBar = document.getElementById('changeBar');
+    if (localStorage.getItem('token')) {
+        filterContainer.style.display = "none";
+        gallery.style.marginTop = "4rem";
+        change.style.display = "flex";
+        changeBar.style.display = "flex";
+
+    } else {
+        // si l'élément avec l'ID "container-filter" n'existe pas dans le document HTML
+    }
+    console.log(filterContainer);
+};
+
+
+
+const loginElement = document.querySelector('#logout');
+
+if (localStorage.getItem('token')) {
+    loginElement.textContent = 'logout';
+} else {
+    loginElement.textContent = 'login';
+};
+
+loginElement.addEventListener('click', () => {
+    if (localStorage.getItem('token')) {
+        localStorage.removeItem('token');
+        loginElement.textContent = 'Login';
+    }
+});
+
 
 // appel des fonctions
 fetchWorks();
 fetchCategories();
+adminMode();
 
 // exemple d'utilisation de la fonction deleteWork lorsqu'un bouton est cliqué
-const deleteButton = document.querySelector('#delete-button');
-deleteButton.addEventListener('click', () => {
-    const workId = `2`; // l'ID de l'œuvre à supprimer
-    deleteWork(workId);
-});
+//const deleteButton = document.querySelector('#delete-button');
+//deleteButton.addEventListener('click', () => {
+//    const workId = '2'; // l'ID de l'œuvre à supprimer
+//    deleteWork(workId);
+//});
+

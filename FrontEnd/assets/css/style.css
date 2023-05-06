@@ -144,6 +144,42 @@ body {
   font-size: 14px;
 }
 
+#changeBar {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  height: 59px;
+  width: 100%;
+  background-color: black;
+}
+#changeBar #editionMode {
+  align-items: center;
+  display: flex;
+}
+#changeBar .fa-pen-to-square {
+  margin-right: 0.6rem;
+  font-size: 1.2rem;
+}
+#changeBar p {
+  margin-right: 1rem;
+}
+#changeBar .publish {
+  font-family: "Syne";
+  color: black;
+  padding: 0.6rem 1.2rem;
+  border-radius: 60px;
+  transition: 0.2s;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+}
+#changeBar .publish:hover {
+  cursor: pointer;
+  background-color: #19554a;
+  color: white;
+}
+
 header {
   display: flex;
   justify-content: space-between;
@@ -227,13 +263,29 @@ nav ul img {
   margin-bottom: 0.5em;
 }
 
-#portfolio h2 {
-  text-align: center;
+.project {
   margin-bottom: 1.5em;
 }
-#portfolio h2 .fa-pen-to-square {
-  color: black;
+.project h2 {
+  display: flex;
+  justify-content: center;
+}
+.project h2 #change {
+  align-items: center;
+  display: none;
+}
+.project h2 #change:hover {
+  cursor: pointer;
+}
+.project h2 p {
   font-size: 1rem;
+  color: black;
+  margin-left: 10px;
+}
+.project h2 .fa-pen-to-square {
+  color: black;
+  font-size: 1.2rem;
+  margin-left: 2.5rem;
 }
 
 #filter-container {
