@@ -1,6 +1,7 @@
 let tokenValue = localStorage.token;
 const filterContainer = document.getElementById('filter-container');
 const gallery = document.querySelector('.gallery');
+const galleryEdit = document.querySelector('.galleryEdit');
 const change = document.getElementById('change');
 
 const fetchWorks = async () => {
@@ -26,19 +27,54 @@ const fetchWorks = async () => {
         console.log(data);
     }
 };
+const fetchWorksEdit = async () => {
+    const response = await fetch('http://localhost:5678/api/works');
+    const data = await response.json();
+
+    // Parcourir les données et créer un élément image pour chaque image
+    if (data) {
+        data.forEach((work, index) => {
+            const workElement = document.createElement('div');
+            workElement.classList.add("imgEdit");
+
+            const imageElement = document.createElement('img');
+            imageElement.setAttribute('src', work.imageUrl);
+            imageElement.setAttribute('alt', work.title);
+            workElement.appendChild(imageElement);
+            //Arrow position 
+            if (index === 0) {
+                const iconArrowElement = document.createElement('i');
+                iconArrowElement.classList.add('fa-solid', 'fa-arrows-up-down-left-right', 'absolute');
+                workElement.appendChild(iconArrowElement);
+            }
+
+            const iconTrashElement = document.createElement('i');
+            iconTrashElement.classList.add('fa-solid', 'fa-trash-can', 'absolute', 'delete');
+            workElement.appendChild(iconTrashElement);
+
+            const titleElement = document.createElement('p');
+            titleElement.textContent = 'éditer';
+            workElement.appendChild(titleElement);
+
+            galleryEdit.appendChild(workElement);
+        });
+    } else {
+        console.log(data);
+    }
+};
+
+
 
 const fetchCategories = async () => {
     const response = await fetch('http://localhost:5678/api/categories');
     const categories = await response.json();
-
-
     // Bouton "Tous"
     const allButton = document.createElement('button');
     allButton.textContent = 'Tous';
     allButton.addEventListener('click', async () => {
         const response = await fetch('http://localhost:5678/api/works');
         const works = await response.json();
-        gallery.innerHTML = ''; 0
+        gallery.innerHTML = '';
 
         works.forEach(work => {
             const workElement = document.createElement('figure');
@@ -66,7 +102,7 @@ const fetchCategories = async () => {
             const response = await fetch(`http://localhost:5678/api/works?categoryId=${category.id}`);
             const works = await response.json();
             gallery.innerHTML = '';
-
+            const workElement = document.createElement('figure');
             works.forEach(work => {
                 if (work.categoryId === category.id) {
                     const workElement = document.createElement('figure');
@@ -90,24 +126,41 @@ const fetchCategories = async () => {
 
 
 
-
-
-
-const deleteWork = async (workId) => {
-    const response = await fetch(`http://localhost:5678/api/works/${workId}`, {
-        method: 'DELETE',
-        headers: {
-            'Authorization': `Bearer ${TOKEN}`
-        }
-    });
-    const data = await response.json();
-    // vérifier que la réponse est bien de type JSON avant de l'utiliser
-    if (response.ok) {
+const deleteWork = async (id) => {
+    try {
+        const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+            method: 'DELETE',
+            headers: {
+                accept: "application/json",
+                'Content-Type': "application/json",
+                'Authorization': `Bearer ${tokenValue}`
+            }
+        });
+        const data = await response.json();
         console.log(data);
-    } else {
-        console.error(data);
+        const image = document.querySelector(`.work[data-id="${id}"] img`);
+        if (image) {
+            image.parentNode.removeChild(image);
+        }
+    } catch (err) {
+        console.log("Il y a eu une erreur sur le Fetch: " + err);
     }
 };
+
+// ajouter un événement de clic sur le bouton de suppression
+const deleteBtns = document.querySelectorAll('.delete');
+deleteBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const workId = btn.dataset.id;
+        deleteWork(workId);
+    });
+});
+
+
+
+
+
+
 
 function adminMode() {
     const changeBar = document.getElementById('changeBar');
@@ -124,7 +177,6 @@ function adminMode() {
 };
 
 
-
 const loginElement = document.querySelector('#logout');
 
 if (localStorage.getItem('token')) {
@@ -139,17 +191,23 @@ loginElement.addEventListener('click', () => {
         loginElement.textContent = 'Login';
     }
 });
-
+//ouvrir modal
+change.addEventListener('click', () => {
+    const myModal = document.getElementById('myModal');
+    myModal.style.display = "block";
+});
+//croix
+const close = document.getElementById('close');
+close.addEventListener('click', () => {
+    myModal.style.display = "none";
+});
 
 // appel des fonctions
 fetchWorks();
+fetchWorksEdit();
 fetchCategories();
 adminMode();
+deleteWork();
 
 // exemple d'utilisation de la fonction deleteWork lorsqu'un bouton est cliqué
-//const deleteButton = document.querySelector('#delete-button');
-//deleteButton.addEventListener('click', () => {
-//    const workId = '2'; // l'ID de l'œuvre à supprimer
-//    deleteWork(workId);
-//});
 
