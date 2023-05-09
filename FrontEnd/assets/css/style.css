@@ -288,7 +288,7 @@ nav ul img {
   margin-left: 2.5rem;
 }
 
-#myModal {
+.myModal {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -301,14 +301,10 @@ nav ul img {
   background-color: white;
   display: none;
 }
-#myModal #modalContent {
+.myModal .modalContent {
   width: 30rem;
 }
-#myModal #modalContent button:hover {
-  cursor: pointer;
-  background-color: #19554a;
-}
-#myModal #modalContent h3 {
+.myModal .modalContent h3 {
   margin: 0.5rem 0 2rem 0;
   font-family: "Work Sans";
   font-size: 26px;
@@ -316,11 +312,11 @@ nav ul img {
   color: black;
   text-align: center;
 }
-#myModal #modalContent hr {
+.myModal .modalContent hr {
   border: 1px solid #B3B3B3;
   margin-top: 2.2rem;
 }
-#myModal #modalContent button {
+.myModal .modalContent button {
   font-family: "Syne";
   color: white;
   background-color: #1D6154;
@@ -337,35 +333,38 @@ nav ul img {
   display: flex;
   align-items: center;
 }
-#myModal #modalContent #close {
+.myModal .modalContent button:hover {
+  cursor: pointer;
+  background-color: #19554a;
+}
+.myModal .modalContent .close {
   position: absolute;
-  font-weight: bold;
   top: 30px;
   right: 30px;
 }
-#myModal #modalContent #close:hover {
+.myModal .modalContent .close:hover {
   cursor: pointer;
 }
-#myModal #modalContent #deleteEdit {
+.myModal .modalContent #deleteEdit {
   color: red;
   text-align: center;
 }
-#myModal #modalContent #deleteEdit:hover {
+.myModal .modalContent #deleteEdit:hover {
   cursor: pointer;
 }
-#myModal .galleryEdit {
+.myModal .galleryEdit {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
 }
-#myModal .galleryEdit .imgEdit {
+.myModal .galleryEdit .imgEdit {
   flex-basis: 20%;
   box-sizing: border-box;
   padding: 5px;
   margin-bottom: 10px;
   position: relative;
 }
-#myModal .galleryEdit .imgEdit .absolute {
+.myModal .galleryEdit .imgEdit .absolute {
   position: absolute;
   z-index: 1;
   top: 10px;
@@ -375,20 +374,33 @@ nav ul img {
   color: white;
   font-size: 10px;
 }
-#myModal .galleryEdit .imgEdit .absolute:hover {
+.myModal .galleryEdit .imgEdit .absolute:hover {
   cursor: pointer;
 }
-#myModal .galleryEdit .imgEdit .fa-trash-can {
+.myModal .galleryEdit .imgEdit .fa-trash-can {
   right: 10px;
 }
-#myModal .galleryEdit .imgEdit .fa-arrows-up-down-left-right {
+.myModal .galleryEdit .imgEdit .fa-arrows-up-down-left-right {
   right: 30px;
 }
-#myModal .galleryEdit .imgEdit img {
+.myModal .galleryEdit .imgEdit img {
   width: 100%;
   height: 90%;
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+#modalFile {
+  display: none;
+}
+#modalFile .fa-arrow-left {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+}
+#modalFile #formChoix {
+  display: flex;
+  flex-direction: column;
 }
 
 #filter-container {
@@ -446,7 +458,8 @@ label {
   margin: 2em 0 1em 0;
 }
 
-input {
+input,
+#choix {
   height: 3.188rem;
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);

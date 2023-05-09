@@ -69,15 +69,34 @@
 					</div>
 				</h2>
 			</div>
-			<div id="myModal">
-				<div id="modalContent">
-					<span id="close"><i class="fa-solid fa-xmark"></i></span>
+			<div class="myModal" id="modalEdit">
+				<div class="modalContent">
+					<span class="close"><i class="fa-solid fa-xmark"></i></span>
 					<h3>Galerie photo</h3>
 					<div class="galleryEdit">
 					</div>
 					<hr>
 					<button id="buttonEdit">Ajouter une photo</button>
 					<p id="deleteEdit">Supprimer la galerie</p>
+				</div>
+			</div>
+			<div class="myModal" id="modalFile">
+				<div class="modalContent">
+					<i class="fa-solid fa-arrow-left"></i>
+					<span class="close"><i class="fa-solid fa-xmark"></i></span>
+					<h3>Ajout photo</h3>
+					<form action="#" method="post" id="formChoix">
+						<label for="titre">Titre</label>
+						<input type="text" name="titre" class="titre">
+						<label for="categorie">Catégories</label>
+						<select name="categorie" id="choix" form="FormChoix">
+							<option value="vide"> </option>
+							<option value="objet">Objets</option>
+							<option value="appartement">Appartements</option>
+							<option value="h&r">Hotel & restaurants</option>
+						</select>
+						<input type="submit" value="Envoyer">
+					</form>
 				</div>
 			</div>
 			<div id="filter-container"></div>
@@ -107,7 +126,6 @@
 		</nav>
 	</footer>
 	<script src="./assets/Javascript/index.js"></script>
-
 </body>
 
 

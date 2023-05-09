@@ -27,6 +27,8 @@ const fetchWorks = async () => {
         console.log(data);
     }
 };
+
+
 const fetchWorksEdit = async () => {
     const response = await fetch('http://localhost:5678/api/works');
     const data = await response.json();
@@ -126,41 +128,33 @@ const fetchCategories = async () => {
 
 
 
-const deleteWork = async (id) => {
-    try {
-        const response = await fetch(`http://localhost:5678/api/works/${id}`, {
-            method: 'DELETE',
-            headers: {
-                accept: "application/json",
-                'Content-Type': "application/json",
-                'Authorization': `Bearer ${tokenValue}`
+
+const deleteWork = async () => {
+    const deleteIcons = document.querySelectorAll('.fa-trash-can');
+    deleteIcons.forEach(icon => {
+        icon.addEventListener('click', async (event) => {
+            const workElement = event.target.closest('.imgEdit');
+            const imageElement = workElement.querySelector('img');
+            const imageSrc = imageElement.getAttribute('src');
+            const workId = workElement.dataset.workId;
+
+            const response = await fetch(`http://localhost:5678/api/works/${workId}`, {
+                method: 'DELETE',
+                headers: {
+                    accept: "application/json",
+                    'Content-Type': "application/json",
+                    'Authorization': `Bearer ${tokenValue}`
+                }
+            });
+            if (response.ok) {
+                workElement.remove();
+                console.log('Supprimé');
+            } else {
+                console.error(`HTTP error! Status: ${response.status}`);
             }
         });
-        const data = await response.json();
-        console.log(data);
-        const image = document.querySelector(`.work[data-id="${id}"] img`);
-        if (image) {
-            image.parentNode.removeChild(image);
-        }
-    } catch (err) {
-        console.log("Il y a eu une erreur sur le Fetch: " + err);
-    }
-};
-
-// ajouter un événement de clic sur le bouton de suppression
-const deleteBtns = document.querySelectorAll('.delete');
-deleteBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        const workId = btn.dataset.id;
-        deleteWork(workId);
     });
-});
-
-
-
-
-
-
+};
 
 function adminMode() {
     const changeBar = document.getElementById('changeBar');
@@ -177,7 +171,7 @@ function adminMode() {
 };
 
 
-const loginElement = document.querySelector('#logout');
+const loginElement = document.getElementById('logout');
 
 if (localStorage.getItem('token')) {
     loginElement.textContent = 'logout';
@@ -193,14 +187,24 @@ loginElement.addEventListener('click', () => {
 });
 //ouvrir modal
 change.addEventListener('click', () => {
-    const myModal = document.getElementById('myModal');
+    const myModal = document.getElementById('modalEdit');
     myModal.style.display = "block";
+
+    const close = document.querySelector('.close');
+    close.addEventListener('click', () => {
+        myModal.style.display = "none";
+
+    });
+    const buttonEdit = document.getElementById('buttonEdit');
+    const modalFile = document.getElementById('modalFile');
+    buttonEdit.addEventListener('click', () => {
+        myModal.style.display = "none";
+        modalFile.style.display = "block";
+    });
 });
-//croix
-const close = document.getElementById('close');
-close.addEventListener('click', () => {
-    myModal.style.display = "none";
-});
+
+
+
 
 // appel des fonctions
 fetchWorks();
