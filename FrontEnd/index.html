@@ -64,15 +64,14 @@
 		</section>
 		<section id="portfolio">
 			<div class="project">
-				<h2>Mes Projets</h2>
-				<div id="change"> <i class="fa-regular fa-pen-to-square"></i>
-					<p>modifier</p>
-				</div>
-
+				<h2>Mes Projets<div id="change"> <i class="fa-regular fa-pen-to-square"></i>
+						<p>modifier</p>
+					</div>
+				</h2>
 			</div>
 			<div class="myModal" id="modalEdit">
 				<div class="modalContent">
-					<i class="fa-solid fa-xmark close"></i>
+					<span class="close"><i class="fa-solid fa-xmark"></i></span>
 					<h3>Galerie photo</h3>
 					<div class="galleryEdit">
 					</div>
@@ -83,29 +82,20 @@
 			</div>
 			<div class="myModal" id="modalFile">
 				<div class="modalContent">
-					<i class="fa-solid fa-xmark close"></i>
-					<span id="left">
-						<i class="fa-solid fa-arrow-left"></i>
-					</span>
+					<i class="fa-solid fa-arrow-left"></i>
+					<span class="close"><i class="fa-solid fa-xmark"></i></span>
 					<h3>Ajout photo</h3>
-					<div id="fileImg">
-						<i class="fa-regular fa-image"></i>
-						<div id="preview"></div>
-						<label for="file" id="addFile">Ajouter photo</label>
-						<input type="file" id="file" name="file" accept="image/*">
-						<p>jpg, png : 4mo max</p>
-					</div>
 					<form action="#" method="post" id="formChoix">
 						<label for="titre">Titre</label>
-						<input type="text" name="titre" id="titre">
+						<input type="text" name="titre" class="titre">
 						<label for="categorie">Catégories</label>
-						<select name="categorie" id="choix" form="formChoix">
+						<select name="categorie" id="choix" form="FormChoix">
 							<option value="vide"> </option>
 							<option value="objet">Objets</option>
 							<option value="appartement">Appartements</option>
 							<option value="h&r">Hotel & restaurants</option>
 						</select>
-						<input type="submit" value="Envoyer" id="send">
+						<input type="submit" value="Envoyer">
 					</form>
 				</div>
 			</div>
@@ -123,7 +113,7 @@
 				<input type="email" name="email" class="email">
 				<label for="message">Message</label>
 				<textarea name="message" id="message" cols="30" rows="10"></textarea>
-				<input type="submit" value="Valider">
+				<input type="submit" value="Envoyer">
 			</form>
 		</section>
 	</main>
