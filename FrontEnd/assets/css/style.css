@@ -265,24 +265,23 @@ nav ul img {
 
 .project {
   margin-bottom: 1.5em;
-}
-.project h2 {
   display: flex;
+  align-items: center;
   justify-content: center;
 }
-.project h2 #change {
+.project #change {
   align-items: center;
   display: none;
 }
-.project h2 #change:hover {
+.project #change:hover {
   cursor: pointer;
 }
-.project h2 p {
+.project p {
   font-size: 1rem;
   color: black;
   margin-left: 10px;
 }
-.project h2 .fa-pen-to-square {
+.project .fa-pen-to-square {
   color: black;
   font-size: 1.2rem;
   margin-left: 2.5rem;
@@ -398,6 +397,46 @@ nav ul img {
   top: 30px;
   left: 30px;
 }
+#modalFile #fileImg {
+  background: #E8F1F7;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 1.5rem 0 1.5rem 0;
+}
+#modalFile #fileImg input[type=file] {
+  display: none;
+}
+#modalFile #fileImg label#addFile {
+  font-family: "Syne";
+  color: white;
+  background-color: #CBD6DC;
+  margin: 2em auto;
+  padding: 0 2.5rem;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 60px;
+  transition: 0.2s;
+  height: 36px;
+  font-size: 0.875rem;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  color: #306685;
+  display: flex;
+  align-items: center;
+}
+#modalFile #fileImg #preview img {
+  width: 200px;
+}
+#modalFile #fileImg p {
+  font-family: "Work Sans";
+  font-size: 10px;
+}
+#modalFile #fileImg i {
+  font-size: 5rem;
+  color: #B9C5CC;
+}
 #modalFile #formChoix {
   display: flex;
   flex-direction: column;
@@ -464,6 +503,8 @@ input,
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
   outline: none;
+  font-family: "Work Sans";
+  font-weight: 500;
 }
 
 input[type=submit] {

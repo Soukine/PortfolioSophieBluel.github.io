@@ -301,33 +301,32 @@ nav {
 
 .project {
     margin-bottom: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    h2 {
-        display: flex;
-        justify-content: center;
+    #change {
+        align-items: center;
+        display: none;
 
-        #change {
-            align-items: center;
-            display: none;
-
-            &:hover {
-                cursor: pointer;
-            }
-        }
-
-        p {
-            font-size: 1rem;
-            color: black;
-            margin-left: 10px;
-        }
-
-        .fa-pen-to-square {
-            color: black;
-            font-size: 1.2rem;
-            margin-left: 2.5rem;
+        &:hover {
+            cursor: pointer;
         }
     }
+
+    p {
+        font-size: 1rem;
+        color: black;
+        margin-left: 10px;
+    }
+
+    .fa-pen-to-square {
+        color: black;
+        font-size: 1.2rem;
+        margin-left: 2.5rem;
+    }
 }
+
 
 .myModal {
     position: fixed;
@@ -445,6 +444,41 @@ nav {
         left: 30px;
     }
 
+    #fileImg {
+        background: #E8F1F7;
+        border-radius: 3px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem 0 1.5rem 0;
+
+        input[type="file"] {
+            display: none;
+        }
+
+        label#addFile {
+            @include button(#CBD6DC);
+            color: #306685;
+            display: flex;
+            align-items: center;
+
+        }
+
+        #preview img {
+            width: 200px;
+        }
+
+        p {
+            font-family: 'Work Sans';
+            font-size: 10px;
+        }
+
+        i {
+            font-size: 5rem;
+            color: #B9C5CC;
+        }
+    }
+
     #formChoix {
         display: flex;
         flex-direction: column;
@@ -519,6 +553,8 @@ input,
     border: none;
     box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
     outline: none;
+    font-family: 'Work Sans';
+    font-weight: 500;
 }
 
 input[type="submit"] {
