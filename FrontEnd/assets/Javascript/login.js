@@ -1,37 +1,46 @@
-// Récupérons le formulaire HTML
-const formulaire = document.getElementById("login");
+// LOGIN //
 
-// Définissons une fonction qui sera appelée lors de la soumission du formulaire
-async function soumettreFormulaire(event) {
-    event.preventDefault(); // Empêche le formulaire de se soumettre
+const loginForm = document.querySelector("#js-login-form");
+const errorMessage = document.querySelector("#js-error-message");
+const connectButton = document.querySelector("#js-connect-button");
 
-    const email = formulaire.email.value;
-    const password = formulaire.password.value;
-
-    const dataForm = {
+const login = async (email, password) => {
+  try {
+    const response = await fetch("http://localhost:5678/api/users/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
         email: email,
-        password: password
-    };
-
-    const response = await fetch(`http://localhost:5678/api/users/login`, {
-        method: "POST",
-        body: JSON.stringify(dataForm),
-        headers: {
-            "Content-Type": "application/json"
-        }
+        password: password,
+      }),
     });
 
-    if (!response.ok) {
-        const errorMessage = "Erreur dans l'identifiant ou le mot de passe";
-        const messageErreur = document.getElementById("wrong-psw");
-        messageErreur.textContent = errorMessage;
-        return;
+    if (response.status === 200) {
+      const data = await response.json();
+      const token = data.token;
+      localStorage.setItem("token", token);
+      window.location.href = "./index.html";
+      console.log(token);
+    } else {
+      errorMessage.textContent = "Erreur dans l’identifiant ou le mot de passe";
+      connectButton.classList.add("shake");
+
+      setTimeout(() => {
+        connectButton.classList.remove("shake");
+      }, 500);
     }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-    const data = await response.json();
-    localStorage.setItem("token", data.token);
-    window.location.href = "index.html";
-}
+loginForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const email = loginForm.querySelector("#js-email").value;
+  const password = loginForm.querySelector("#js-password").value;
 
-// Ajoutons un écouteur d'événements sur le formulaire
-formulaire.addEventListener("submit", soumettreFormulaire);
+  login(email, password);
+});
