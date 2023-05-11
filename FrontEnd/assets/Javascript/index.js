@@ -188,9 +188,6 @@ loginElement.addEventListener('click', () => {
 });
 
 
-
-
-
 const modalEdit = document.getElementById('modalEdit');
 const openerEdit = document.getElementById('change');
 let closeEdit = document.querySelector('#modalEdit .close');
@@ -264,9 +261,9 @@ function fetchAddWork() {
         if (titreInput.value && categorieInput.value && addFile.files[0]) {
             fetch('http://localhost:5678/api/works', {
                 method: 'POST',
+                body: formData,
                 headers: {
                     Authorization: `Bearer ${tokenValue}`,
-                    body: formData,
                 },
 
             })
