@@ -222,6 +222,14 @@ document.addEventListener('click', function (e) {
         currentModal.style.display = 'none';
         currentModal = null; // mettre à jour la référence au modal actuel
     }
+    // Vérifier si l'élément cliqué est la classe "left"
+    else if (e.target.classList.contains('left')) {
+        if (currentModal === modalFile) { // si modalFile est actuellement ouvert
+            modalFile.style.display = 'none'; // fermer modalFile
+            modalEdit.style.display = 'block'; // ouvrir modalEdit
+            currentModal = modalEdit; // mettre à jour la référence au modal actuel
+        }
+    }
 });
 
 // Ajouter un écouteur d'événement sur le bouton close de modalEdit
@@ -231,6 +239,7 @@ closeEdit.addEventListener('click', function () {
         currentModal = null;
     }
 });
+
 
 
 
@@ -256,15 +265,14 @@ function fetchAddWork() {
             fetch('http://localhost:5678/api/works', {
                 method: 'POST',
                 headers: {
-                    contentType: 'multipart/form-data',
                     Authorization: `Bearer ${tokenValue}`,
+                    body: formData,
                 },
-                body: formData,
+
             })
                 .then((response) => response.json())
                 .then((data) => {
                     console.log('Ajout de travail réussi :', data);
-                    previewDiv.innerHTML = `<img src="${data.image}" alt="${data.title}"><h2>${data.title}</h2><p>${data.category}</p>`;
                 })
                 .catch((error) => {
                     console.error(error);
